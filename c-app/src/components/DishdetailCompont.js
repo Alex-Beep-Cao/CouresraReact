@@ -24,7 +24,7 @@ const RenderComment = ({ dish }) => {
     return (
       <div className="col-12 col-md-5 m-1">
         <Card>
-          <p2 style={{ margin: "10px" }}>Comments:</p2>
+          <p style={{ margin: "10px" }}>Comments:</p>
           {dish.comments.map((c) => {
             return (
               <div>
