@@ -24,10 +24,17 @@ const RenderLeader = ({ leader }) => {
   );
 };
 
-const About = ({ leaders }) => {
+const About = (props) => {
   // leaders.reduce((res, item, index) => {}, []);
   // const x = leaders.map((leader) => <li>{leader}</li>);
   // const Comp = ({ leaders }) => leaders.map((leader) => <li>{leader}</li>);
+  const leaders = props.leaders.map((leader) => {
+    return (
+      <div className="col-12 mt-5">
+        <RenderLeader leader={leader} />
+      </div>
+    );
+  });
   return (
     <div className="container">
       {/* {l(leaders)(2)}
@@ -108,7 +115,7 @@ const About = ({ leaders }) => {
         </div>
         <div className="col-12">
           <Media list>
-            {leaders.map((leader) => (
+            {/* {leaders.map((leader) => (
               <div key={leader.id} className="col-12 mt-5">
                 <Media tag="li">
                   <Media objec scr={leader.img} alt={leader.name} />
@@ -119,8 +126,8 @@ const About = ({ leaders }) => {
                   <p>{leader.description}</p>
                 </Media>
               </div>
-            ))}
-            {/* {leaders} */}
+            ))} */}
+            {leaders}
           </Media>
         </div>
       </div>
