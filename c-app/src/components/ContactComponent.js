@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,15 +11,73 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Contact = (props) => {
-  const [firstName, SetfirstName] = useState();
-  const [lastName, SetlastName] = useState();
-  const [tellNum, SettellNum] = useState();
-  const [email, Setemail] = useState();
-  const [agree, Setagree] = useState(false);
-  const [message, setmessage] = useState();
-  const [contactType, setcontactType] = useState("Tel.");
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    tellNum: "",
+    email: "",
+    agree: false,
+    message: "",
+    contactType: "Tel.",
+  });
+  // const [firstName, SetfirstName] = useState();
+  // const [lastName, SetlastName] = useState();
+  // const [tellNum, SettellNum] = useState();
+  // const [email, Setemail] = useState();
+  // const [agree, Setagree] = useState(false);
+  // const [message, setmessage] = useState();
+  // const [contactType, setcontactType] = useState("Tel.");
 
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+    // const target = event.target;
+    // const vaule = target.type === "checkbox" ? target.checked : target.value;
+    // const name = target.name;
+  };
+
+  const handleSubmit = (event) => {
+    console.log(formData);
+    event.preventDefault();
+  };
+
+  // class Contact extends Component {
+  //   constructor(props) {
+  //     super(props);
+
+  //     this.state = {
+  //       firstname: "",
+  //       lastname: "",
+  //       telnum: "",
+  //       email: "",
+  //       agree: false,
+  //       contactType: "Tel.",
+  //       message: "",
+  //     };
+
+  //     this.handleInputChange = this.handleInputChange.bind(this);
+  //     this.handleSubmit = this.handleSubmit.bind(this);
+  //   }
+
+  //   handleInputChange(event) {
+  //     const target = event.target;
+  //     const value = target.type === "checkbox" ? target.checked : target.value;
+  //     const name = target.name;
+
+  //     this.setState({
+  //       [name]: value,
+  //     });
+  //   }
+
+  //   handleSubmit(event) {
+  //     console.log("Current State is: " + JSON.stringify(this.state));
+  //     alert("Current State is: " + JSON.stringify(this.state));
+  //     event.preventDefault();
+  //   }
+  //   render() {
   return (
     <div className="container">
       <div className="row">
@@ -85,7 +143,7 @@ const Contact = (props) => {
           <h3>Send us your feedback</h3>
         </div>
         <div className="col-12 col-md-9">
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <FormGroup row>
               <Label htmlFor="firstname" md={2}>
                 First Name
@@ -96,7 +154,8 @@ const Contact = (props) => {
                   id="firstname"
                   name="firstname"
                   placeholder="First Name"
-                  value={firstName}
+                  value={formData.firstName}
+                  onChange={handleInputChange}
                 />
               </Col>
             </FormGroup>
@@ -110,7 +169,8 @@ const Contact = (props) => {
                   id="lastname"
                   name="lastname"
                   placeholder="Last Name"
-                  value={lastName}
+                  value={formData.lastName}
+                  onChange={handleInputChange}
                 />
               </Col>
             </FormGroup>
@@ -124,7 +184,8 @@ const Contact = (props) => {
                   id="telnum"
                   name="telnum"
                   placeholder="Tel. number"
-                  value={tellNum}
+                  value={formData.tellNum}
+                  onChange={handleInputChange}
                 />
               </Col>
             </FormGroup>
@@ -138,7 +199,8 @@ const Contact = (props) => {
                   id="email"
                   name="email"
                   placeholder="Email"
-                  value={email}
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </Col>
             </FormGroup>
@@ -146,16 +208,48 @@ const Contact = (props) => {
               <Col md={{ size: 6, offset: 2 }}>
                 <FormGroup check>
                   <Label check>
-                    <Input type="checkbox" name="agree" checked={agree} />
+                    <Input
+                      type="checkbox"
+                      name="agree"
+                      checked={formData.agree}
+                      onChange={handleInputChange}
+                    />
                     <strong>May we contact you?</strong>
                   </Label>
                 </FormGroup>
               </Col>
               <Col md={{ size: 3, offset: 1 }}>
-                <Input type="select" name="contactType" value={contactType}>
+                <Input
+                  type="select"
+                  name="contactType"
+                  value={formData.contactType}
+                  onChange={handleInputChange}
+                >
                   <option>Tel.</option>
                   <option>Email</option>
                 </Input>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label htmlFor="message" md={2}>
+                Your Feedback
+              </Label>
+              <Col md={10}>
+                <Input
+                  type="textarea"
+                  id="message"
+                  name="message"
+                  rows="12"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                ></Input>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col md={{ size: 10, offset: 2 }}>
+                <Button type="submit" color="primary">
+                  Send Feedback
+                </Button>
               </Col>
             </FormGroup>
           </Form>
@@ -164,5 +258,5 @@ const Contact = (props) => {
     </div>
   );
 };
-
+//}
 export default Contact;
