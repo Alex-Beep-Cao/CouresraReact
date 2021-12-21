@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
+    firstame: "",
     lastName: "",
     tellNum: "",
     email: "",
@@ -152,7 +152,7 @@ const Contact = () => {
                 <Input
                   type="text"
                   id="firstname"
-                  name="firstname"
+                  name="firstName"
                   placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleInputChange}
@@ -167,7 +167,7 @@ const Contact = () => {
                 <Input
                   type="text"
                   id="lastname"
-                  name="lastname"
+                  name="lastName"
                   placeholder="Last Name"
                   value={formData.lastName}
                   onChange={handleInputChange}
@@ -182,7 +182,7 @@ const Contact = () => {
                 <Input
                   type="tel"
                   id="telnum"
-                  name="telnum"
+                  name="tellNum"
                   placeholder="Tel. number"
                   value={formData.tellNum}
                   onChange={handleInputChange}
@@ -197,9 +197,9 @@ const Contact = () => {
                 <Input
                   type="email"
                   id="email"
-                  name="email"
+                  name="Email"
                   placeholder="Email"
-                  value={formData.email}
+                  value={formData.Email}
                   onChange={handleInputChange}
                 />
               </Col>
