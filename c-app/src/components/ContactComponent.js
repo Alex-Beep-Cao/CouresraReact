@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -195,7 +195,7 @@ class Contact extends Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <a href="#" role="button" className="btn btn-info">
                 <i className="fa fa-skype"></i> Skype
               </a>
               <a
