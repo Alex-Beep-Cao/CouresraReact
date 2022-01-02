@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { addComment } from "../redux/ActionCreators";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -41,7 +42,7 @@ function RenderDish({ dish }) {
   }
 }
 
-const RenderComment = ({ comments, toggleModal }) => {
+const RenderComment = ({ comments, toggleModal, addComment, dishId }) => {
   if (comments != null) {
     return (
       <div className="col-12 col-md-5 m-1">
@@ -80,6 +81,12 @@ const DishDetail = (props) => {
   const handleSubmit = (values) => {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+    props.addComment(
+      props.dishId,
+      values.rating,
+      values.author,
+      values.comment
+    );
   };
   return (
     <div className="container">
@@ -100,7 +107,12 @@ const DishDetail = (props) => {
       </div>
       <div className="row">
         <RenderDish dish={props.dish} />
-        <RenderComment comments={props.comments} toggleModal={RenderComments} />
+        <RenderComment
+          comments={props.comments}
+          toggleModal={RenderComments}
+          addComment={props.addComment}
+          dishId={props.dish.id}
+        />
       </div>
 
       <Modal isOpen={isModelOpen} toggle={RenderComments}>
