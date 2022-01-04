@@ -18,7 +18,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
-import { addComment } from "../redux/ActionCreators";
 
 class CommentForm extends Component {
   constructor(props) {
@@ -35,8 +34,7 @@ class CommentForm extends Component {
   handleCommentFormSubmit(values) {
     // console.log("Current State is: " + JSON.stringify(values));
     // alert("Current State is: " + JSON.stringify(values));
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    this.toggleCommentFormModal();
     this.props.addComment(
       this.props.dishId,
       values.rating,
@@ -200,7 +198,7 @@ function RenderDish({ dish }) {
   }
 }
 
-const RenderComment = ({ dishId, comments }) => {
+const RenderComment = ({ dishId, comments, addComment }) => {
   if (comments != null) {
     return (
       <div className="col-12 col-md-5 m-1">
@@ -223,7 +221,7 @@ const RenderComment = ({ dishId, comments }) => {
           })}
         </Card>
 
-        <CommentForm dishId={dishId} comments={comments} />
+        <CommentForm dishId={dishId} addComment={addComment} />
       </div>
     );
   } else {
@@ -235,16 +233,7 @@ const DishDetail = (props) => {
   const RenderComments = () => {
     setIsModelOpen(!isModelOpen);
   };
-  const handleSubmit = (values) => {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
-    props.addComment(
-      props.dishId,
-      values.rating,
-      values.author,
-      values.comment
-    );
-  };
+
   return (
     <div className="container">
       <div className="row">

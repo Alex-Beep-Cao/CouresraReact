@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const manDishpatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   addComment: (dishId, rating, author, comment) =>
     dispatch(addComment(dishId, rating, author, comment)),
 });
@@ -86,4 +86,5 @@ class Main extends Component {
     );
   }
 }
-export default withRouter(connect(mapStateToProps, manDishpatchToProps)(Main));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
