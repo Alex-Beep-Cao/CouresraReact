@@ -24,6 +24,7 @@ const manDishpatchToProps = (dispatch) => ({
   addComment: (dishId, rating, author, comment) =>
     dispatch(addComment(dishId, rating, author, comment)),
 });
+
 class Main extends Component {
   render() {
     const HomePage = () => {
@@ -50,7 +51,7 @@ class Main extends Component {
           comments={this.props.comments.filter(
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
-          addComment ={this.props.addComment}
+          addComment={this.props.addComment}
         />
       );
     };
