@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
   Card,
   CardImg,
@@ -229,11 +229,6 @@ const RenderComment = ({ dishId, comments, addComment }) => {
   }
 };
 const DishDetail = (props) => {
-  const [isModelOpen, setIsModelOpen] = useState(false);
-  const RenderComments = () => {
-    setIsModelOpen(!isModelOpen);
-  };
-
   return (
     <div className="container">
       <div className="row">
@@ -255,7 +250,6 @@ const DishDetail = (props) => {
         <RenderDish dish={props.dish} />
         <RenderComment
           comments={props.comments}
-          toggleModal={RenderComments}
           addComment={props.addComment}
           dishId={props.dish.id}
         />
