@@ -91,7 +91,7 @@ class Main extends Component {
             exact
             path="/contactus"
             component={() => (
-              <ContactPage resetFeedbackForm={this.props.resetFeedbackForm} />
+              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
             )}
           />
 
