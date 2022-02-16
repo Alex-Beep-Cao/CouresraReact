@@ -9,12 +9,13 @@ import Contact from "./ContactComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  addComment,
+  postComment,
   fetchDishes,
   fetchComments,
   fetchPromos,
 } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 // make state become props
 const mapStateToProps = (state) => {
@@ -31,8 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment), fetchDishes),
+  postComment: (dishId, rating, author, comment) =>
+    dispatch(postComment(dishId, rating, author, comment), fetchDishes),
 
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -83,6 +84,7 @@ class Main extends Component {
           )}
           commentsErrMess={this.props.comments.errMess}
           addComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };
@@ -94,30 +96,37 @@ class Main extends Component {
       <div>
         <Header />
         {/* can switch below views  */}
-        <Switch>
-          {/* component just view no props */}
-          <Route path="/home" component={HomePage} />
-          {/* if you want to pass the props, you should do a fucntional component  */}
-          <Route
-            exact
-            path="/menu"
-            component={() => <Menu dishes={this.props.dishes} />}
-          />
-          <Route path="/menu/:dishId" component={DishWithId} />
+        <TransitionGroup>
+          <CSSTransition
+            key={this.props.location.key}
+            classNames="page"
+            timeout={300}
+          >
+            <Switch>
+              {/* component just view no props */}
+              <Route path="/home" component={HomePage} />
+              {/* if you want to pass the props, you should do a fucntional component  */}
+              <Route
+                exact
+                path="/menu"
+                component={() => <Menu dishes={this.props.dishes} />}
+              />
+              <Route path="/menu/:dishId" component={DishWithId} />
 
-          <Route
-            exact
-            path="/contactus"
-            component={() => (
-              <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
-            )}
-          />
+              <Route
+                exact
+                path="/contactus"
+                component={() => (
+                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                )}
+              />
 
-          <Route path="/aboutus" component={AboutPage} />
-          {/* the default route. if the nothing match return this default route  */}
-          <Redirect to="/home" />
-        </Switch>
-
+              <Route path="/aboutus" component={AboutPage} />
+              {/* the default route. if the nothing match return this default route  */}
+              <Redirect to="/home" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer />
       </div>
     );

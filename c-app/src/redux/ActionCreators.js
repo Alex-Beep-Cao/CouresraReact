@@ -1,15 +1,56 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 
-export const addComment = (dishId, rating, author, comment) => ({
+export const addComment = (comment) => ({
   type: ActionTypes.ADD_COMMENT,
-  payload: {
+  payload: comment,
+});
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+  const newComment = {
     dishId: dishId,
     rating: rating,
     author: author,
     comment: comment,
-  },
-});
+  };
+  newComment.date = new Date().toISOString();
+
+  // return (
+  //   fetch(baseUrl + "comments", {
+  //     method: "POST",
+  //     body: JSON.stringify(newComment),
+  //     eaders: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then(
+  //       (res) => {
+  //         if (res.ok) {
+  //           return res;
+  //         } else {
+  //           var error = new Error(
+  //             "Error " + res.status + ": " + res.statusText
+  //           );
+  //           error.res = res;
+  //           throw error;
+  //         }
+  //       },
+  //       (error) => {
+  //         throw error;
+  //       }
+  //     )
+
+  //     .then((res) => res.json()) // after POST to the server site the server site will send back the
+
+  //     //updated comment back with ID
+  //     .then((res) => dispatch(addComment(res)))
+  //     // then posted into my redux store by dispatching it as shown here (add to the store)
+  //     .catch((error) => {
+  //       console.log("post comments", error.message);
+  //       alert("Your comment could not be posted\nError: " + error.message);
+  //     })
+  // );
+};
 
 // thunk return funcion
 export const fetchDishes = () => (dispatch) => {
